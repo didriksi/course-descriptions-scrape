@@ -10,3 +10,5 @@ dataset = make_dataset(course_df)
 ```
 
 There are some options as to what parts of the course descriptions to include in the `id_headers`-kwarg in `scrapeEachCourse.get_course_description`.
+
+Based on [didriksi/course-search](https://github.com/didriksi/course-search)
