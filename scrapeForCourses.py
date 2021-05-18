@@ -103,7 +103,7 @@ def find_coursecodes(coursepage_url):
 if __name__ == '__main__':
     faculties, institutes, coursecodes, coursenames, urls = [], [], [], [], []
 
-    if sys.argv[1] == "en":
+    if len(sys.argv) >= 2 and sys.argv[1] == "en":
         base_url = "https://www.uio.no/english/studies/courses/all/?page="
     else:
         base_url = "https://www.uio.no/studier/emner/alle/?page="
@@ -126,6 +126,6 @@ if __name__ == '__main__':
     courseData['institute'] = institutes
     courseData['url'] = urls
     
-    courseData.to_pickle('courses.pkl')
+    courseData.to_csv('courses.csv')
 
-    print(f"\rFound {len(coursecodes)} courses on those pages, and saved them in 'courses.pkl'\033[K", flush=True)
+    print(f"\rFound {len(coursecodes)} courses on those pages, and saved them in 'courses.csv'\033[K", flush=True)

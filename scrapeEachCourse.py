@@ -35,18 +35,8 @@ def get_course_description(content_tag,
 
     return total_text
 
-def make_dataset(course_df):
-    """Makes a ML-friendly list of course descriptions from a dataframe.
-
-    :param course_df: pd.DataFrame with columns coursecode, coursename, course_description.
-
-    :return: List of strings.
-    """
-    return ["{coursecode} {coursename}\n\n{course_description}".format(**course)
-            for (_, course) in course_df.iterrows() if course["course_description"]]
-
 if __name__ == '__main__':
-    courseData = pd.read_pickle('courses.pkl')
+    courseData = pd.read_csv('courses.csv')
     num_courses = len(courseData.index)
 
     course_descriptions = []
@@ -60,7 +50,7 @@ if __name__ == '__main__':
 
     courseData['course_description'] = course_descriptions
 
-    courseData.to_pickle('courses.pkl')
+    courseData.to_pickle('courses.csv')
 
     print("\rScraped all courses, and updated dataframe in `courses.pkl`\033[K")
     print("Dataset can be generated with make_dataset(courseData)")
