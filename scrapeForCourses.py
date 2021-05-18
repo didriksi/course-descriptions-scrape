@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
+import sys
 
 def make_soup(url):
     """Makes bs4.BeautifulSoup instance of content of url.
@@ -102,7 +103,12 @@ def find_coursecodes(coursepage_url):
 if __name__ == '__main__':
     faculties, institutes, coursecodes, coursenames, urls = [], [], [], [], []
 
-    for coursepage_url in get_course_url_list(base_url="https://www.uio.no/english/studies/courses/all/?page="):
+    if sys.argv[1] == "en":
+        base_url = "https://www.uio.no/english/studies/courses/all/?page="
+    else:
+        base_url = "https://www.uio.no/studier/emner/alle/?page="
+    
+    for coursepage_url in get_course_url_list(base_url=base_url):
         print(f"\rGoing through {coursepage_url}. Have so far found {len(coursecodes)} courses.", flush=True, end='')
         new_faculties, new_institutes, new_coursecodes, new_coursenames, new_urls = find_coursecodes(coursepage_url)
         
